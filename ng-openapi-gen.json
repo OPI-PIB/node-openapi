@@ -1,0 +1,13 @@
+{
+	"prefix": "Api",
+	"ignoreUnusedModels": false,
+	"minParamsForContainer": 2,
+	"sortParams": "desc",
+	"defaultTag": "Api",
+	"removeStaleFiles": true,
+	"modelIndex": true,
+	"serviceIndex": true,
+	"apiModule": true,
+	"enumModule": true,
+	"generateExamples": false
+}

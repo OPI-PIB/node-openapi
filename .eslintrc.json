@@ -1,0 +1,10 @@
+{
+	"env": {
+		"es2022": true
+	},
+	"extends": ["@opi-pib/base"],
+	"plugins": [],
+	"rules": {
+		"no-unused-expressions": "off"
+	}
+}
