@@ -1,4 +1,4 @@
-# @opi-pib/node-openapi
+# @opi_pib/node-openapi
 
 ## Cli commands
 

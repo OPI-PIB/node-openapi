@@ -3,7 +3,7 @@ import * as path from 'path';
 
 import { removeSync, writeJsonSync } from 'fs-extra';
 import { mergeDeepLeft, reduce } from 'ramda';
-import { Notify } from '@opi-pib/node-utility';
+import { Notify } from '@opi_pib/node-utility';
 
 import { Loader } from '../loader/loader';
 

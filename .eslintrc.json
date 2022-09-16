@@ -2,7 +2,7 @@
 	"env": {
 		"es2022": true
 	},
-	"extends": ["@opi-pib/base"],
+	"extends": ["@opi_pib/base"],
 	"plugins": [],
 	"rules": {
 		"no-unused-expressions": "off"
