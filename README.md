@@ -35,7 +35,7 @@ openapi build typescript --source=http://localhost:3011 --dist=./src/rest/api --
 
 ## Default config
 
-```json
+```
 {
 	basePath: '/v1',
 	host: 'http://localhost',
