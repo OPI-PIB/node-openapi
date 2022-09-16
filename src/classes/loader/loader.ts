@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs-extra';
-import { Maybe } from '@opi-pib/ts-utility';
-import { Notify } from '@opi-pib/node-utility';
+import { Maybe } from '@opi_pib/ts-utility';
+import { Notify } from '@opi_pib/node-utility';
 
 export class Loader {
 	static loadSource(source: string): Maybe<any> {

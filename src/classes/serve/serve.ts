@@ -1,4 +1,4 @@
-import { Notify } from '@opi-pib/node-utility';
+import { Notify } from '@opi_pib/node-utility';
 import express from 'express';
 import * as swaggerUi from 'swagger-ui-express';
 
