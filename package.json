@@ -1,6 +1,6 @@
 {
 	"name": "@opi_pib/node-openapi",
-	"version": "1.0.5",
+	"version": "1.0.7",
 	"description": "Openapi tools",
 	"main": "dist/cli.js",
 	"types": "dist/cli.d.ts",
@@ -20,11 +20,11 @@
 	"author": "Dawid Lubowiecki",
 	"license": "MIT",
 	"dependencies": {
-		"@opi_pib/node-utility": "^1.0.4",
-		"@opi_pib/ts-utility": "^1.0.4",
+		"@opi_pib/node-utility": "^1.0.5",
+		"@opi_pib/ts-utility": "^1.1.0",
 		"@openapitools/openapi-generator-cli": "^2.5.2",
 		"express": "^4.18.2",
-		"fs-extra": "10.1.0",
+		"fs-extra": "11.1.0",
 		"ng-openapi-gen": "^0.23.0",
 		"ramda": "^0.28.0",
 		"swagger-cli": "^4.0.4",
@@ -32,12 +32,12 @@
 		"yargs": "^17.6.2"
 	},
 	"devDependencies": {
-		"@opi_pib/eslint-config-base": "^1.0.4",
+		"@opi_pib/eslint-config-base": "^1.0.5",
 		"@types/fs-extra": "^9.0.13",
 		"@types/ramda": "^0.28.20",
 		"@types/swagger-ui-express": "^4.1.3",
-		"@types/yargs": "^17.0.13",
-		"@typescript-eslint/eslint-plugin": "5.43.0",
+		"@types/yargs": "^17.0.15",
+		"@typescript-eslint/eslint-plugin": "5.45.0",
 		"eslint": "^8.28.0",
 		"eslint-plugin-import": "^2.26.0",
 		"typescript": "~4.8.2"
