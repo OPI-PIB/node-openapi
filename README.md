@@ -1,5 +1,15 @@
 # @opi_pib/node-openapi
 
+-   [Install](#install)
+-   [Cli commands](#cli-commands)
+-   [Default config](#default-config)
+
+## Install
+
+```
+npm install @opi_pib/node-openapi
+```
+
 ## Cli commands
 
 ### Display cli documentation
