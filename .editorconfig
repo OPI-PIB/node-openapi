@@ -18,3 +18,7 @@ trim_trailing_whitespace = false
 [*.handlebars]
 max_line_length = off
 insert_final_newline = false
+
+[*.yml]
+indent_style = space
+indent_size = 2
