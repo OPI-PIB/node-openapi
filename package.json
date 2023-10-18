@@ -1,6 +1,6 @@
 {
 	"name": "@opi_pib/node-openapi",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"description": "Openapi tools",
 	"main": "dist/cli.js",
 	"types": "dist/cli.d.ts",
@@ -19,8 +19,8 @@
 	"author": "Dawid Lubowiecki",
 	"license": "MIT",
 	"dependencies": {
-		"@opi_pib/node-utility": "^1.1.8",
-		"@opi_pib/ts-utility": "^1.1.8",
+		"@opi_pib/node-utility": "^1.1.9",
+		"@opi_pib/ts-utility": "^1.1.9",
 		"@openapitools/openapi-generator-cli": "^2.7.0",
 		"express": "^4.18.2",
 		"fs-extra": "11.1.1",
@@ -31,7 +31,7 @@
 		"yargs": "^17.7.2"
 	},
 	"devDependencies": {
-		"@opi_pib/eslint-config-base": "^1.0.11",
+		"@opi_pib/eslint-config-base": "^1.0.12",
 		"@types/fs-extra": "^11.0.2",
 		"@types/ramda": "^0.29.6",
 		"@types/swagger-ui-express": "^4.1.4",

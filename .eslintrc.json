@@ -4,7 +4,5 @@
 	},
 	"extends": ["@opi_pib/base"],
 	"plugins": [],
-	"rules": {
-		"no-unused-expressions": "off"
-	}
+	"rules": {}
 }
