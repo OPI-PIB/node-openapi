@@ -14,4 +14,5 @@ exports.builder = {
 		default: config.dist.fileName,
 	},
 };
-exports.handler = (argv: any) => Build.spec(argv.source, argv.dist, argv.filename);
+exports.handler = (argv: any) =>
+	Build.spec(argv.source, argv.dist, argv.filename);
