@@ -17,4 +17,5 @@ exports.builder = {
 		default: config.basePath,
 	},
 };
-exports.handler = (argv: any) => Serve.editor(argv.port, argv.host, argv.source, argv.basePath);
+exports.handler = (argv: any) =>
+	Serve.editor(argv.port, argv.host, argv.source, argv.basePath);

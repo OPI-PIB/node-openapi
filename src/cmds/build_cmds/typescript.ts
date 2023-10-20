@@ -18,7 +18,9 @@ exports.builder = {
 	},
 };
 exports.handler = (argv: any) => {
-	const source = /^https?:\/\//.test(argv.source) ? argv.source : path.resolve(path.join(process.cwd(), argv.source));
+	const source = /^https?:\/\//.test(argv.source)
+		? argv.source
+		: path.resolve(path.join(process.cwd(), argv.source));
 	const dist = path.resolve(path.join(process.cwd(), argv.dist));
 	Build.typescript(source, dist, argv.typesOnly !== 'false');
 };
