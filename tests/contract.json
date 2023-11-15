@@ -1,0 +1,67 @@
+{
+	"openapi": "3.0.3",
+	"info": {
+		"title": "Contract",
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"description": "Mock",
+			"url": "http://localhost:4011"
+		}
+	],
+	"tags": [
+		{
+			"name": "custom-tag",
+			"description": "Custom Tag"
+		}
+	],
+	"paths": {},
+	"components": {
+		"schemas": {
+			"IsoDateWithTimeDto": {
+				"type": "string",
+				"format": "date-time",
+				"description": "local: 2020-09-15T09:01:05, UTC: 2020-09-15T09:01:05Z, Pattern: ^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z?$"
+			},
+			"ListSortingOrderDto": {
+				"type": "string",
+				"enum": ["ASC", "DESC"]
+			},
+			"Dates": {
+				"title": "Dates",
+				"type": "object",
+				"properties": {
+					"activation": {
+						"$ref": "#/components/schemas/IsoDateWithTimeDto",
+						"nullable": true
+					},
+					"creation": {
+						"$ref": "#/components/schemas/IsoDateWithTimeDto"
+					},
+					"modification": {
+						"$ref": "#/components/schemas/IsoDateWithTimeDto"
+					}
+				},
+				"required": ["modification"]
+			},
+			"User": {
+				"title": "User",
+				"type": "object",
+				"properties": {
+					"firstname": {
+						"type": "string",
+						"nullable": true
+					},
+					"middlename": {
+						"type": "string"
+					},
+					"surname": {
+						"type": "string"
+					}
+				},
+				"required": ["surname"]
+			}
+		}
+	}
+}
