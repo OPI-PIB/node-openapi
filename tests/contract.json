@@ -33,10 +33,18 @@
 				"type": "object",
 				"properties": {
 					"activation": {
-						"$ref": "#/components/schemas/IsoDateWithTimeDto",
-						"nullable": true
+						"nullable": true,
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/IsoDateWithTimeDto"
+							}
+						]
 					},
 					"creation": {
+						"$ref": "#/components/schemas/IsoDateWithTimeDto"
+					},
+					"deactivation": {
+						"nullable": true,
 						"$ref": "#/components/schemas/IsoDateWithTimeDto"
 					},
 					"modification": {
