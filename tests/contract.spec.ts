@@ -11,45 +11,48 @@ describe('Generation tests using contract.json', () => {
 	});
 
 	describe('Dates', () => {
+		const activation = gen.models.get('Dates')?.properties.at(0);
+		const creation = gen.models.get('Dates')?.properties.at(1);
+		const deactivation = gen.models.get('Dates')?.properties.at(2);
+		const modification = gen.models.get('Dates')?.properties.at(3);
+
 		describe('activation', () => {
 			it('Has proper type', () => {
-				expect(gen.models.get('Dates')?.properties.at(0)?.type).toBe(
-					'null | IsoDateWithTimeDto'
-				);
+				expect(activation?.type).toBe('IsoDateWithTimeDto | null');
 			});
 
 			it('Is optional', () => {
-				expect(
-					gen.models.get('Dates')?.properties.at(0)?.required
-				).toBe(false);
+				expect(activation?.required).toBe(false);
 			});
 		});
 
 		describe('creation', () => {
 			it('Has proper type', () => {
-				expect(gen.models.get('Dates')?.properties.at(1)?.type).toBe(
-					'IsoDateWithTimeDto'
-				);
+				expect(creation?.type).toBe('IsoDateWithTimeDto');
 			});
 
 			it('Is optional', () => {
-				expect(
-					gen.models.get('Dates')?.properties.at(1)?.required
-				).toBe(false);
+				expect(creation?.required).toBe(false);
+			});
+		});
+
+		describe('deactivation', () => {
+			it('Has proper type', () => {
+				expect(deactivation?.type).toBe('IsoDateWithTimeDto'); // openapi limitation: https://github.com/cyclosproject/ng-openapi-gen/issues/301
+			});
+
+			it('Is optional', () => {
+				expect(deactivation?.required).toBe(false);
 			});
 		});
 
 		describe('modification', () => {
 			it('Has proper type', () => {
-				expect(gen.models.get('Dates')?.properties.at(2)?.type).toBe(
-					'IsoDateWithTimeDto'
-				);
+				expect(modification?.type).toBe('IsoDateWithTimeDto');
 			});
 
 			it('Is required', () => {
-				expect(
-					gen.models.get('Dates')?.properties.at(2)?.required
-				).toBe(true);
+				expect(modification?.required).toBe(true);
 			});
 		});
 	});
@@ -58,7 +61,7 @@ describe('Generation tests using contract.json', () => {
 		describe('firstname', () => {
 			it('Has proper type', () => {
 				expect(gen.models.get('User')?.properties.at(0)?.type).toBe(
-					'null | string'
+					'string | null'
 				);
 			});
 
