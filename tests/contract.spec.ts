@@ -18,7 +18,7 @@ describe('Generation tests using contract.json', () => {
 
 		describe('activation', () => {
 			it('Has proper type', () => {
-				expect(activation?.type).toBe('IsoDateWithTimeDto | null');
+				expect(activation?.type).toBe('null | IsoDateWithTimeDto');
 			});
 
 			it('Is optional', () => {
@@ -38,7 +38,7 @@ describe('Generation tests using contract.json', () => {
 
 		describe('deactivation', () => {
 			it('Has proper type', () => {
-				expect(deactivation?.type).toBe('IsoDateWithTimeDto'); // openapi limitation: https://github.com/cyclosproject/ng-openapi-gen/issues/301
+				expect(deactivation?.type).toBe('null | IsoDateWithTimeDto'); // ng-openapi-gen 0.50.3: https://github.com/cyclosproject/ng-openapi-gen/issues/301
 			});
 
 			it('Is optional', () => {
@@ -61,7 +61,7 @@ describe('Generation tests using contract.json', () => {
 		describe('firstname', () => {
 			it('Has proper type', () => {
 				expect(gen.models.get('User')?.properties.at(0)?.type).toBe(
-					'string | null'
+					'null | string'
 				);
 			});
 
