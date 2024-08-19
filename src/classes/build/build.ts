@@ -2,10 +2,26 @@ import { execSync } from 'child_process';
 import * as path from 'path';
 
 import { removeSync, writeJsonSync } from 'fs-extra';
-import { mergeDeepLeft, reduce } from 'ramda';
+import { concat, mergeDeepLeft, mergeWith, reduce, uniq } from 'ramda';
 import { Notify } from '@opi_pib/node-utility';
 
 import { Loader } from '../loader/loader';
+import { Is } from '@opi_pib/ts-utility';
+
+const customMerge = (acc: any, currentFile: any) =>
+	mergeWith(
+		(a, b) => {
+			if (Is.array(a) && Is.array(b)) {
+				return uniq(concat(a, b)); // Merge arrays by concatenating and removing duplicates
+			} else if (Is.object(a) && Is.object(b)) {
+				return mergeDeepLeft(a, b); // Default deep merge for objects
+			} else {
+				return b; // Fallback for non-objects/arrays
+			}
+		},
+		acc,
+		currentFile
+	);
 
 export class Build {
 	static spec(
@@ -20,7 +36,7 @@ export class Build {
 				(acc: any, elem: string) => {
 					const currentFile = Loader.loadSource(elem);
 					return currentFile != null
-						? mergeDeepLeft(acc, currentFile)
+						? customMerge(acc, currentFile)
 						: acc;
 				},
 				{},
