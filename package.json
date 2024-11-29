@@ -1,6 +1,6 @@
 {
 	"name": "@opi_pib/node-openapi",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"description": "Openapi tools",
 	"main": "dist/cli.js",
 	"types": "dist/cli.d.ts",
@@ -21,7 +21,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"@openapitools/openapi-generator-cli": "^2.0.0",
-		"@opi_pib/node-utility": "^1.0.0",
+		"@opi_pib/node-utility": "^2.0.0",
 		"@opi_pib/ts-utility": "^2.0.0",
 		"express": "^4.0.0",
 		"fs-extra": "^11.0.0",
