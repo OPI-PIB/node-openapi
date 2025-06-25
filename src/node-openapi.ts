@@ -1,5 +1,4 @@
-import yargs from 'yargs/yargs';
-import { hideBin } from 'yargs/helpers';
+#!/usr/bin/env node
 
-// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-yargs(hideBin(process.argv)).commandDir('cmds').demandCommand().help().argv;
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+require('yargs').commandDir('cmds').demandCommand().help().parse();
