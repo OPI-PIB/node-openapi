@@ -1,4 +1,8 @@
 #!/usr/bin/env node
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-require('yargs').commandDir('cmds').demandCommand().help().parse();
+require('yargs/yargs')(process.argv.slice(2))
+	.commandDir('cmds')
+	.demandCommand()
+	.help()
+	.parse();
