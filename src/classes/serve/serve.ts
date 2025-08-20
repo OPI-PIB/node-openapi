@@ -18,11 +18,30 @@ export class Serve {
 
 			app.use(basePath, swaggerUi.serve, swaggerUi.setup(file));
 
-			app.listen(port, () =>
+			const server = app.listen(port, () =>
 				Notify.info({
 					message: `Listening on: ${host}:${port}${basePath}`,
 				})
 			);
+
+			server.on('error', (err: any) => {
+				if (err.code === 'EADDRINUSE') {
+					console.error(`Port ${port} is busy`);
+				} else {
+					throw err;
+				}
+			});
+
+			const shutdown = () => {
+				server.close(() => {
+					console.log('Server stopped, port freed.');
+					process.exit(0);
+				});
+			};
+
+			process.on('SIGINT', shutdown); // Ctrl+C
+			process.on('SIGTERM', shutdown); // kill
+			process.on('exit', shutdown);
 		}
 	}
 
@@ -32,7 +51,7 @@ export class Serve {
 		if (file != null) {
 			const app = express();
 
-			app.listen(port, () =>
+			const server = app.listen(port, () =>
 				Notify.info({
 					message: `Listening on: ${host}:${port}`,
 				})
@@ -41,6 +60,25 @@ export class Serve {
 			app.get('/', (req, res) => {
 				res.send(file);
 			});
+
+			server.on('error', (err: any) => {
+				if (err.code === 'EADDRINUSE') {
+					console.error(`Port ${port} is busy`);
+				} else {
+					throw err;
+				}
+			});
+
+			const shutdown = () => {
+				server.close(() => {
+					console.log('Server stopped, port freed.');
+					process.exit(0);
+				});
+			};
+
+			process.on('SIGINT', shutdown); // Ctrl+C
+			process.on('SIGTERM', shutdown); // kill
+			process.on('exit', shutdown);
 		}
 	}
 }
