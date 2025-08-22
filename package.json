@@ -1,6 +1,6 @@
 {
 	"name": "@opi_pib/node-openapi",
-	"version": "2.2.5",
+	"version": "2.2.6",
 	"description": "Openapi tools",
 	"main": "dist/node-openapi.js",
 	"types": "dist/node-openapi.d.ts",
