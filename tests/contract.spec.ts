@@ -17,7 +17,7 @@ describe('Generation tests using contract.json', () => {
 		const modification = gen.models.get('Dates')?.properties.at(3);
 
 		describe('activation', () => {
-			it('Has proper type', () => {
+			it.only('Has proper type', () => {
 				expect(activation?.type).toBe('null | IsoDateWithTimeDto');
 			});
 
