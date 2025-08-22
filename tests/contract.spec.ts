@@ -17,7 +17,7 @@ describe('Generation tests using contract.json', () => {
 		const modification = gen.models.get('Dates')?.properties.at(3);
 
 		describe('activation', () => {
-			it.only('Has proper type', () => {
+			it('Has proper type', () => {
 				expect(activation?.type).toBe('null | IsoDateWithTimeDto');
 			});
 
@@ -61,7 +61,7 @@ describe('Generation tests using contract.json', () => {
 		describe('firstname', () => {
 			it('Has proper type', () => {
 				expect(gen.models.get('User')?.properties.at(0)?.type).toBe(
-					'null | string'
+					'string | null'
 				);
 			});
 
