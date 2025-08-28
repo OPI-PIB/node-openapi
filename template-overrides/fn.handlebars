@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import { HttpClient, HttpContext, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { {{@root.responseClass}} } from '{{pathToRoot}}{{@root.responseFile}}';
@@ -18,7 +18,21 @@ export interface {{paramsType}} {
 {{/requestBody}}
 }
 
-export function {{importName}}(http: HttpClient, rootUrl: string, params{{^operation.parametersRequired}}?{{/operation.parametersRequired}}: {{paramsType}}, reportProgress = false, context?: HttpContext): Observable<{{@root.responseClass}}<{{{resultType}}}>> {
+export function {{importName}}<
+	T = {{{resultType}}},
+>(http: HttpClient, rootUrl: string, reportProgress: true, params{{^operation.parametersRequired}}?{{/operation.parametersRequired}}: {{paramsType}}, context?: HttpContext): Observable<HttpEvent<T>>
+
+export function {{importName}}<
+	T = {{{resultType}}},
+>(http: HttpClient, rootUrl: string, reportProgress: false, params{{^operation.parametersRequired}}?{{/operation.parametersRequired}}: {{paramsType}}, context?: HttpContext): Observable<StrictHttpResponse<T>>
+
+export function {{importName}}<
+	T = {{{resultType}}},
+>(http: HttpClient, rootUrl: string, reportProgress: boolean, params{{^operation.parametersRequired}}?{{/operation.parametersRequired}}: {{paramsType}}, context?: HttpContext): Observable<HttpEvent<T> | StrictHttpResponse<T>>
+
+export function {{importName}}<
+	T = {{{resultType}}},
+>(http: HttpClient, rootUrl: string, reportProgress: boolean = false, params{{^operation.parametersRequired}}?{{/operation.parametersRequired}}: {{paramsType}}, context?: HttpContext): Observable<HttpEvent<T> | StrictHttpResponse<T>> {
   const rb = new {{@root.requestBuilderClass}}(rootUrl, {{importName}}.PATH, '{{operation.method}}');
   if (params) {
 {{#operation.parameters}}
@@ -29,14 +43,18 @@ export function {{importName}}(http: HttpClient, rootUrl: string, params{{^opera
 {{/requestBody}}
   }
 
-  return http.request(
-    rb.build({ responseType: '{{{responseType}}}', accept: '{{{accept}}}', reportProgress, context })
-  ).pipe(
-    filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
-    map((r: HttpResponse<any>) => {
-      {{> handleResponse}}
-    })
-  );
+	const req = rb.build({ responseType: '{{{responseType}}}', accept: '{{{accept}}}', reportProgress, context });
+
+	if (reportProgress) {
+		return http.request(req) as Observable<HttpEvent<T>>;
+	} else {
+		return http.request(req).pipe(
+			filter((e: any): e is HttpResponse<T> => e instanceof HttpResponse),
+			map((res: HttpResponse<T>) =>
+				res.clone({ body: res.body as T }) as unknown as StrictHttpResponse<T>
+			),
+		);
+	}
 }
 
 {{importName}}.PATH = '{{{operation.path}}}';
