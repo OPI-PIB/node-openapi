@@ -77,7 +77,13 @@ export class Build {
 		}
 	}
 
-	static async typescript(source: string, dist: string, typesOnly: boolean): Promise<void> {
+	static async typescript(
+		source: string,
+		dist: string,
+		typesOnly: boolean,
+		services: boolean,
+		promises: boolean
+	): Promise<void> {
 		removeSync(dist);
 		removeSync(`${dist}$`);
 		const templatePath = path.resolve(path.join(__dirname, '../../../template-overrides'));
@@ -88,11 +94,20 @@ export class Build {
 				output: dist,
 				servicePrefix: 'Api',
 				ignoreUnusedModels: false,
-				templates: templatePath
+				templates: templatePath,
+				enumArray: false,
+				enumStyle: 'pascal',
+				services,
+				promises
 			};
 
+			const contract = await fetch(options.input);
+			if (!contract.ok) throw new Error(`Failed to fetch OpenAPI JSON: ${contract.statusText}`);
+
+			const contractJson = await contract.json();
+
 			const RefParser = new $RefParser();
-			const openApi = (await RefParser.bundle(options.input, {
+			const openApi = (await RefParser.bundle(contractJson, {
 				dereference: { circular: false }
 			})) as OpenAPIObject;
 
@@ -119,9 +134,10 @@ export class Build {
 		const unusedFiles = [
 			path.join(dist, '/fn'),
 			path.join(dist, '/services'),
-			path.join(dist, '/api.module.ts'),
 			path.join(dist, '/api-configuration.ts'),
+			path.join(dist, '/api.ts'),
 			path.join(dist, '/base-service.ts'),
+			path.join(dist, '/functions.ts'),
 			path.join(dist, '/request-builder.ts'),
 			path.join(dist, '/services.ts'),
 			path.join(dist, '/strict-http-response.ts')

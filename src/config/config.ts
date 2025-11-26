@@ -3,15 +3,17 @@ export const config = {
 	host: 'http://localhost',
 	port: {
 		editor: '3010',
-		spec: '3011',
+		spec: '3011'
 	},
 	dist: {
 		folder: './dist',
-		fileName: 'index',
+		fileName: 'index'
 	},
 	sourceUrl: './src/docs/index.json',
 	typescript: {
 		dist: './src/rest/api',
 		typesOnly: true,
-	},
+		services: true,
+		promises: false
+	}
 };
