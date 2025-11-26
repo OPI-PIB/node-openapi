@@ -1,4 +1,4 @@
-import { execSync } from 'child_process';
+import { execSync, execFileSync } from 'child_process';
 import * as path from 'path';
 
 import { removeSync, writeJsonSync } from 'fs-extra';
@@ -86,7 +86,12 @@ export class Build {
 		const templatePath = path.resolve(path.join(__dirname, '../../../template-overrides'));
 
 		try {
-			execSync(`ng-openapi-gen --input ${source} --output ${dist} --config ${configPath} --templates ${templatePath}`);
+			execFileSync('ng-openapi-gen', [
+				'--input', source,
+				'--output', dist,
+				'--config', configPath,
+				'--templates', templatePath
+			], { stdio: 'inherit' });
 
 			Notify.success({
 				message: `Files generated in directory: ${dist}`
