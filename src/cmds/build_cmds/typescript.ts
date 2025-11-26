@@ -8,19 +8,23 @@ exports.alias = 'ts';
 exports.desc = 'Generate typescript models';
 exports.builder = {
 	source: {
-		default: `${config.host}:${config.port.spec}`,
+		default: `${config.host}:${config.port.spec}`
 	},
 	dist: {
-		default: config.typescript.dist,
+		default: config.typescript.dist
 	},
 	typesOnly: {
-		default: config.typescript.typesOnly,
+		default: config.typescript.typesOnly
 	},
+	services: {
+		default: config.typescript.services
+	},
+	promises: {
+		default: config.typescript.promises
+	}
 };
 exports.handler = (argv: any) => {
-	const source = /^https?:\/\//.test(argv.source)
-		? argv.source
-		: path.resolve(path.join(process.cwd(), argv.source));
+	const source = /^https?:\/\//.test(argv.source) ? argv.source : path.resolve(path.join(process.cwd(), argv.source));
 	const dist = path.resolve(path.join(process.cwd(), argv.dist));
-	Build.typescript(source, dist, argv.typesOnly !== 'false');
+	Build.typescript(source, dist, argv.typesOnly !== 'false', argv.services !== 'false', argv.promises === 'true');
 };

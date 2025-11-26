@@ -1,6 +1,6 @@
 {
 	"name": "@opi_pib/node-openapi",
-	"version": "3.0.1",
+	"version": "3.0.2",
 	"description": "Openapi tools",
 	"main": "dist/node-openapi.js",
 	"types": "dist/node-openapi.d.ts",
@@ -11,8 +11,7 @@
 	},
 	"files": [
 		"dist",
-		"template-overrides",
-		"ng-openapi-gen.json"
+		"template-overrides"
 	],
 	"bin": {
 		"openapi": "./dist/node-openapi.js"
