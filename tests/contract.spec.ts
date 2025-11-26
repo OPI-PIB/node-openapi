@@ -1,8 +1,9 @@
-import { NgOpenApiGen } from '../node_modules/ng-openapi-gen/lib/ng-openapi-gen';
+import { NgOpenApiGen } from 'ng-openapi-gen/lib/ng-openapi-gen';
 import options from './contract.config.json';
+
 import contract from './contract.json';
 
-const gen = new NgOpenApiGen(contract, options);
+const gen = new NgOpenApiGen(contract as any, options);
 gen.generate();
 
 describe('Generation tests using contract.json', () => {
@@ -17,8 +18,8 @@ describe('Generation tests using contract.json', () => {
 		const modification = gen.models.get('Dates')?.properties.at(3);
 
 		describe('activation', () => {
-			it.skip('Has proper type', () => {
-				expect(activation?.type).toBe('null | IsoDateWithTimeDto');
+			it('Has proper type', () => {
+				expect(activation?.type).toBe('IsoDateWithTimeDto | null');
 			});
 
 			it('Is optional', () => {
@@ -37,8 +38,8 @@ describe('Generation tests using contract.json', () => {
 		});
 
 		describe('deactivation', () => {
-			it.skip('Has proper type', () => {
-				expect(deactivation?.type).toBe('null | IsoDateWithTimeDto');
+			it('Has proper type', () => {
+				expect(deactivation?.type).toBe('IsoDateWithTimeDto | null');
 			});
 
 			it('Is optional', () => {
@@ -60,43 +61,31 @@ describe('Generation tests using contract.json', () => {
 	describe('User', () => {
 		describe('firstname', () => {
 			it('Has proper type', () => {
-				expect(gen.models.get('User')?.properties.at(0)?.type).toBe(
-					'string | null'
-				);
+				expect(gen.models.get('User')?.properties.at(0)?.type).toBe('string | null');
 			});
 
 			it('Is optional', () => {
-				expect(gen.models.get('User')?.properties.at(0)?.required).toBe(
-					false
-				);
+				expect(gen.models.get('User')?.properties.at(0)?.required).toBe(false);
 			});
 		});
 
 		describe('middlename', () => {
 			it('Has proper type', () => {
-				expect(gen.models.get('User')?.properties.at(1)?.type).toBe(
-					'string'
-				);
+				expect(gen.models.get('User')?.properties.at(1)?.type).toBe('string');
 			});
 
 			it('Is optional', () => {
-				expect(gen.models.get('User')?.properties.at(1)?.required).toBe(
-					false
-				);
+				expect(gen.models.get('User')?.properties.at(1)?.required).toBe(false);
 			});
 		});
 
 		describe('surname', () => {
 			it('Has proper type', () => {
-				expect(gen.models.get('User')?.properties.at(2)?.type).toBe(
-					'string'
-				);
+				expect(gen.models.get('User')?.properties.at(2)?.type).toBe('string');
 			});
 
 			it('Is required', () => {
-				expect(gen.models.get('User')?.properties.at(2)?.required).toBe(
-					true
-				);
+				expect(gen.models.get('User')?.properties.at(2)?.required).toBe(true);
 			});
 		});
 	});

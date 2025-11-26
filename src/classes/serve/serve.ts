@@ -5,12 +5,7 @@ import * as swaggerUi from 'swagger-ui-express';
 import { Loader } from '../loader/loader';
 
 export class Serve {
-	static editor(
-		port: string,
-		host: string,
-		source: string,
-		basePath: string
-	): void {
+	static editor(port: string, host: string, source: string, basePath: string): void {
 		const file = Loader.loadSource(source);
 
 		if (file != null) {
@@ -20,7 +15,7 @@ export class Serve {
 
 			const server = app.listen(port, () =>
 				Notify.info({
-					message: `Listening on: ${host}:${port}${basePath}`,
+					message: `Listening on: ${host}:${port}${basePath}`
 				})
 			);
 
@@ -53,7 +48,7 @@ export class Serve {
 
 			const server = app.listen(port, () =>
 				Notify.info({
-					message: `Listening on: ${host}:${port}`,
+					message: `Listening on: ${host}:${port}`
 				})
 			);
 

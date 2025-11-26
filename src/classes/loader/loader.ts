@@ -17,13 +17,12 @@ export class Loader {
 		return file;
 	}
 
-	// eslint-disable-next-line consistent-return
 	static readFile(source: string): Maybe<string> {
 		try {
 			return readFileSync(source, 'utf-8');
 		} catch (e) {
 			Notify.error({
-				message: `Can't read file: ${source}`,
+				message: `Can't read file: ${source}`
 			});
 		}
 	}

@@ -4,9 +4,9 @@ import * as path from 'path';
 import { removeSync, writeJsonSync } from 'fs-extra';
 import { concat, mergeDeepLeft, mergeWith, reduce, uniq } from 'ramda';
 import { Notify } from '@opi_pib/node-utility';
+import { Is } from '@opi_pib/ts-utility';
 
 import { Loader } from '../loader/loader';
-import { Is } from '@opi_pib/ts-utility';
 
 const customMerge = (acc: any, currentFile: any) =>
 	mergeWith(
@@ -24,20 +24,14 @@ const customMerge = (acc: any, currentFile: any) =>
 	);
 
 export class Build {
-	static spec(
-		source: string | string[],
-		dist: string,
-		filename: string
-	): void {
+	static spec(source: string | string[], dist: string, filename: string): void {
 		if (Array.isArray(source)) {
 			const tmpFilePath = 'src/docs/index--tmp.json';
 
 			const spec = reduce(
 				(acc: any, elem: string) => {
 					const currentFile = Loader.loadSource(elem);
-					return currentFile != null
-						? customMerge(acc, currentFile)
-						: acc;
+					return currentFile != null ? customMerge(acc, currentFile) : acc;
 				},
 				{},
 				source
@@ -51,11 +45,7 @@ export class Build {
 		}
 	}
 
-	private static generateSpec(
-		source: string,
-		dist: string,
-		filename: string
-	): void {
+	private static generateSpec(source: string, dist: string, filename: string): void {
 		let isSpecValid = false;
 
 		try {
@@ -66,27 +56,23 @@ export class Build {
 			if (error instanceof Error) {
 				Notify.error({
 					message: 'Openapi schema validation failed',
-					error,
+					error
 				});
 			}
 		}
 
 		if (isSpecValid) {
 			try {
-				execSync(
-					`swagger-cli bundle -o ${dist}/${filename}.json ${source}`
-				);
-				execSync(
-					`swagger-cli bundle -r -o ${dist}/${filename}-dereferenced.json ${source}`
-				);
+				execSync(`swagger-cli bundle -o ${dist}/${filename}.json ${source}`);
+				execSync(`swagger-cli bundle -r -o ${dist}/${filename}-dereferenced.json ${source}`);
 				Notify.success({
-					message: `Openapi spec generated in directory: ${dist}`,
+					message: `Openapi spec generated in directory: ${dist}`
 				});
 			} catch (error) {
 				if (error instanceof Error) {
 					Notify.error({
 						message: 'Openapi spec generation error',
-						error,
+						error
 					});
 				}
 			}
@@ -96,20 +82,14 @@ export class Build {
 	static typescript(source: string, dist: string, typesOnly: boolean): void {
 		removeSync(dist);
 		removeSync(`${dist}$`);
-		const configPath = path.resolve(
-			path.join(__dirname, '../../../ng-openapi-gen.json')
-		);
-		const templatePath = path.resolve(
-			path.join(__dirname, '../../../template-overrides')
-		);
+		const configPath = path.resolve(path.join(__dirname, '../../../ng-openapi-gen.json'));
+		const templatePath = path.resolve(path.join(__dirname, '../../../template-overrides'));
 
 		try {
-			execSync(
-				`ng-openapi-gen --input ${source} --output ${dist} --config ${configPath} --templates ${templatePath}`
-			);
+			execSync(`ng-openapi-gen --input ${source} --output ${dist} --config ${configPath} --templates ${templatePath}`);
 
 			Notify.success({
-				message: `Files generated in directory: ${dist}`,
+				message: `Files generated in directory: ${dist}`
 			});
 
 			if (typesOnly === true) {
@@ -133,7 +113,7 @@ export class Build {
 			path.join(dist, '/base-service.ts'),
 			path.join(dist, '/request-builder.ts'),
 			path.join(dist, '/services.ts'),
-			path.join(dist, '/strict-http-response.ts'),
+			path.join(dist, '/strict-http-response.ts')
 		];
 
 		unusedFiles.forEach((p) => {
