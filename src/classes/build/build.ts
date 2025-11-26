@@ -131,7 +131,17 @@ export class Build {
 	}
 
 	private static removeUnusedFiles(dist: string): void {
-		const unusedFiles = [path.join(dist, '/fn'), path.join(dist, '/services')];
+		const unusedFiles = [
+			path.join(dist, '/fn'),
+			path.join(dist, '/services'),
+			path.join(dist, '/api-configuration.ts'),
+			path.join(dist, '/api.ts'),
+			path.join(dist, '/base-service.ts'),
+			path.join(dist, '/functions.ts'),
+			path.join(dist, '/request-builder.ts'),
+			path.join(dist, '/services.ts'),
+			path.join(dist, '/strict-http-response.ts')
+		];
 
 		unusedFiles.forEach((p) => {
 			removeSync(p);
