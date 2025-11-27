@@ -1,6 +1,7 @@
-import { readFileSync } from 'fs-extra';
-import { Maybe } from '@opi_pib/ts-utility';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Notify } from '@opi_pib/node-utility';
+import { Maybe } from '@opi_pib/ts-utility';
+import { readFileSync } from 'fs-extra';
 
 export class Loader {
 	static loadSource(source: string): Maybe<any> {
@@ -20,7 +21,7 @@ export class Loader {
 	static readFile(source: string): Maybe<string> {
 		try {
 			return readFileSync(source, 'utf-8');
-		} catch (e) {
+		} catch {
 			Notify.error({
 				message: `Can't read file: ${source}`
 			});

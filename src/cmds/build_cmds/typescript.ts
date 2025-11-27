@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import * as path from 'path';
 
 import { Build } from '../../classes/build/build';
@@ -26,5 +30,5 @@ exports.builder = {
 exports.handler = (argv: any) => {
 	const source = /^https?:\/\//.test(argv.source) ? argv.source : path.resolve(path.join(process.cwd(), argv.source));
 	const dist = path.resolve(path.join(process.cwd(), argv.dist));
-	Build.typescript(source, dist, argv.typesOnly !== 'false', argv.services !== 'false', argv.promises === 'true');
+	Build.typescript(source, dist, argv.typesOnly !== 'false', argv.services === 'true', argv.promises === 'true');
 };

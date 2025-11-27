@@ -11,5 +11,16 @@ export default [
 	{
 		...ts,
 		ignores
+	},
+	{
+		...ts,
+		ignores,
+		languageOptions: {
+			...ts.languageOptions,
+			parserOptions: {
+				...ts.languageOptions.parserOptions,
+				project: ['tsconfig.json', './tests/tsconfig.spec.json']
+			}
+		}
 	}
 ];

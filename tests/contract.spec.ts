@@ -1,14 +1,19 @@
-import { NgOpenApiGen } from 'ng-openapi-gen/lib/ng-openapi-gen';
-import options from './contract.config.json';
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { strictEqual } from 'node:assert';
+import { describe, test } from 'node:test';
 
+import { NgOpenApiGen } from 'ng-openapi-gen/lib/ng-openapi-gen';
+import { OpenAPIObject } from 'ng-openapi-gen/lib/openapi-typings';
+
+import options from './contract.config.json';
 import contract from './contract.json';
 
-const gen = new NgOpenApiGen(contract as any, options);
+const gen = new NgOpenApiGen(contract as OpenAPIObject, options);
 gen.generate();
 
 describe('Generation tests using contract.json', () => {
-	it('All models generated', () => {
-		expect(gen.models.size).toBe(4);
+	test('All models generated', () => {
+		strictEqual(gen.models.size, 4);
 	});
 
 	describe('Dates', () => {
@@ -18,74 +23,74 @@ describe('Generation tests using contract.json', () => {
 		const modification = gen.models.get('Dates')?.properties.at(3);
 
 		describe('activation', () => {
-			it('Has proper type', () => {
-				expect(activation?.type).toBe('IsoDateWithTimeDto | null');
+			test('Has proper type', () => {
+				strictEqual(activation?.type, 'IsoDateWithTimeDto | null');
 			});
 
-			it('Is optional', () => {
-				expect(activation?.required).toBe(false);
+			test('Is optional', () => {
+				strictEqual(activation?.required, false);
 			});
 		});
 
 		describe('creation', () => {
-			it('Has proper type', () => {
-				expect(creation?.type).toBe('IsoDateWithTimeDto');
+			test('Has proper type', () => {
+				strictEqual(creation?.type, 'IsoDateWithTimeDto');
 			});
 
-			it('Is optional', () => {
-				expect(creation?.required).toBe(false);
+			test('Is optional', () => {
+				strictEqual(creation?.required, false);
 			});
 		});
 
 		describe('deactivation', () => {
-			it('Has proper type', () => {
-				expect(deactivation?.type).toBe('IsoDateWithTimeDto | null');
+			test('Has proper type', () => {
+				strictEqual(deactivation?.type, 'IsoDateWithTimeDto | null');
 			});
 
-			it('Is optional', () => {
-				expect(deactivation?.required).toBe(false);
+			test('Is optional', () => {
+				strictEqual(deactivation?.required, false);
 			});
 		});
 
 		describe('modification', () => {
-			it('Has proper type', () => {
-				expect(modification?.type).toBe('IsoDateWithTimeDto');
+			test('Has proper type', () => {
+				strictEqual(modification?.type, 'IsoDateWithTimeDto');
 			});
 
-			it('Is required', () => {
-				expect(modification?.required).toBe(true);
+			test('Is required', () => {
+				strictEqual(modification?.required, true);
 			});
 		});
 	});
 
 	describe('User', () => {
 		describe('firstname', () => {
-			it('Has proper type', () => {
-				expect(gen.models.get('User')?.properties.at(0)?.type).toBe('string | null');
+			test('Has proper type', () => {
+				strictEqual(gen.models.get('User')?.properties.at(0)?.type, 'string | null');
 			});
 
-			it('Is optional', () => {
-				expect(gen.models.get('User')?.properties.at(0)?.required).toBe(false);
+			test('Is optional', () => {
+				strictEqual(gen.models.get('User')?.properties.at(0)?.required, false);
 			});
 		});
 
 		describe('middlename', () => {
-			it('Has proper type', () => {
-				expect(gen.models.get('User')?.properties.at(1)?.type).toBe('string');
+			test('Has proper type', () => {
+				strictEqual(gen.models.get('User')?.properties.at(1)?.type, 'string');
 			});
 
-			it('Is optional', () => {
-				expect(gen.models.get('User')?.properties.at(1)?.required).toBe(false);
+			test('Is optional', () => {
+				strictEqual(gen.models.get('User')?.properties.at(1)?.required, false);
 			});
 		});
 
 		describe('surname', () => {
-			it('Has proper type', () => {
-				expect(gen.models.get('User')?.properties.at(2)?.type).toBe('string');
+			test('Has proper type', () => {
+				strictEqual(gen.models.get('User')?.properties.at(2)?.type, 'string');
 			});
 
-			it('Is required', () => {
-				expect(gen.models.get('User')?.properties.at(2)?.required).toBe(true);
+			test('Is required', () => {
+				strictEqual(gen.models.get('User')?.properties.at(2)?.required, true);
 			});
 		});
 	});

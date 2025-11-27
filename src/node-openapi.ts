@@ -1,6 +1,9 @@
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-require-imports */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 require('yargs/yargs')(process.argv.slice(2))
 	.commandDir('cmds')
 	.demandCommand()

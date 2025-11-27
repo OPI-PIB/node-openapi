@@ -1,8 +1,8 @@
 # @opi_pib/node-openapi
 
--   [Install](#install)
--   [Cli commands](#cli-commands)
--   [Default config](#default-config)
+- [Install](#install)
+- [Cli commands](#cli-commands)
+- [Default config](#default-config)
 
 ## Install
 
@@ -58,6 +58,11 @@ openapi build typescript --source=http://localhost:3011 --dist=./src/rest/api --
 		fileName: 'index'
 	},
 	sourceUrl: './src/docs/index.json',
-	tsModelsUrl: './src/rest/api'
+	typescript: {
+		dist: './src/rest/api',
+		typesOnly: true,
+		services: false,
+		promises: false
+	}
 };
 ```
