@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Notify } from '@opi_pib/node-utility';
 import express from 'express';
 import * as swaggerUi from 'swagger-ui-express';
@@ -6,7 +8,7 @@ import { Loader } from '../loader/loader';
 
 export class Serve {
 	static editor(port: string, host: string, source: string, basePath: string): void {
-		const file = Loader.loadSource(source);
+		const file: swaggerUi.JsonObject | null = Loader.loadSource(source);
 
 		if (file != null) {
 			const app = express();

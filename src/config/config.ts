@@ -13,7 +13,7 @@ export const config = {
 	typescript: {
 		dist: './src/rest/api',
 		typesOnly: true,
-		services: true,
+		services: false,
 		promises: false
 	}
 };

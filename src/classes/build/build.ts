@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import * as path from 'path';
 
-import { ensureDir, removeSync, writeFileSync, writeJsonSync } from 'fs-extra';
-import { concat, mergeDeepLeft, mergeWith, reduce, uniq } from 'ramda';
+import { $RefParser } from '@apidevtools/json-schema-ref-parser';
 import { Notify } from '@opi_pib/node-utility';
 import { Is } from '@opi_pib/ts-utility';
-import { $RefParser } from '@apidevtools/json-schema-ref-parser';
+import { ensureDir, removeSync, writeFileSync, writeJsonSync } from 'fs-extra';
 import { NgOpenApiGen } from 'ng-openapi-gen';
-import { Options } from 'ng-openapi-gen/lib/options';
 import { OpenAPIObject } from 'ng-openapi-gen/lib/openapi-typings';
+import { Options } from 'ng-openapi-gen/lib/options';
+import { concat, mergeDeepLeft, mergeWith, reduce, uniq } from 'ramda';
 
 import { Loader } from '../loader/loader';
 
@@ -32,8 +33,8 @@ export class Build {
 			const tmpFilePath = 'src/docs/index--tmp.json';
 
 			const spec = reduce(
-				(acc: any, elem: string) => {
-					const currentFile = Loader.loadSource(elem);
+				(acc: Record<string, unknown>, elem: string) => {
+					const currentFile = Loader.loadSource(elem) as Record<string, unknown>;
 					return currentFile != null ? customMerge(acc, currentFile) : acc;
 				},
 				{},
@@ -60,7 +61,7 @@ export class Build {
 			const dereferenced = (await parser.dereference(source)) as OpenAPIObject;
 
 			// Ensure the output directory exists
-			ensureDir(dist);
+			await ensureDir(dist);
 
 			// Write bundled and dereferenced JSON files
 			writeFileSync(path.join(dist, `${filename}.json`), JSON.stringify(bundled, null, 2));
